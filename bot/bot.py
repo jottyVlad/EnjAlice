@@ -55,6 +55,9 @@ class Bot:
                     request_obj,
                     alice_response
                 )
+                if response is None:
+                    continue
+
                 response_json = json.loads(response.json())
 
                 return web.json_response(response_json)
