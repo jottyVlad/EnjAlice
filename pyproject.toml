@@ -8,7 +8,8 @@ authors = ["jotty <bard143games@gmail.com>"]
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
-fastapi = "^0.68.0"
+aiohttp = "^3.7.4.post0"
+pydantic = "^1.8.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
