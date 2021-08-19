@@ -1,4 +1,4 @@
-from typing import Dict, Union, List
+from typing import Dict, Union, List, Optional
 
 from pydantic import BaseModel
 
@@ -35,7 +35,7 @@ class Request(BaseModel):
 
 
 class User(BaseModel):
-    user_id: str = None
+    user_id: Optional[str] = None
     access_token: str = ""
 
 
@@ -44,7 +44,7 @@ class Application(BaseModel):
 
 
 class Session(BaseModel):
-    message_id: int = None
+    message_id: Optional[int] = None
     session_id: str = ''
     skill_id: str = ''
     user_id: str = ''
