@@ -47,7 +47,8 @@ class Bot:
             return web.json_response(response_json)
 
         for intent_handler in self.dispatcher.intents:
-            if intent_handler.name in list(request_obj.request.nlu.intents.keys()):
+            if (intent_handler.name in list(request_obj.request.nlu.intents.keys()))\
+                    or intent_handler.name is None:
                 alice_response = AliceResponse()
                 alice_response.session_state = request_obj.state.session
                 response: AliceResponse = await intent_handler.handler(
