@@ -1,3 +1,5 @@
+from typing import Optional, List, Callable
+
 from bot.consts import DEFAULT_START_TEXT
 from bot.intent_handler import IntentHandlersCollection, IntentHandler
 
@@ -12,14 +14,28 @@ class Dispatcher:
     def set_start_text(self, text: str):
         self.start_text = text
 
+    def register_message_handler(self,
+                                 priority: int,
+                                 intent: Optional[str],
+                                 handler: Callable):
+        intent_handler = IntentHandler(
+                        name=intent,
+                        priority=priority,
+                        handler=handler
+                    )
+        self.intents.append(intent_handler)
+
     def message_handler(self, priority: int,
-                        intent: str):
+                        intent: Optional[List[str]] = None):
         def decorator(callback):
-            intent_handler = IntentHandler(
-                name=intent,
-                priority=priority,
-                handler=callback
-            )
-            self.intents.append(intent_handler)
+            if intent:
+                for intent_name in intent:
+                    self.register_message_handler(priority=priority,
+                                                  intent=intent_name,
+                                                  handler=callback)
+            else:
+                self.register_message_handler(priority=priority,
+                                              intent=None,
+                                              handler=callback)
             return callback
         return decorator

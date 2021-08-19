@@ -1,10 +1,10 @@
-from typing import Callable
+from typing import Callable, Optional
 
 from pydantic import BaseModel
 
 
 class IntentHandler(BaseModel):
-    name: str
+    name: Optional[str]
     priority: int
     handler: Callable
 
