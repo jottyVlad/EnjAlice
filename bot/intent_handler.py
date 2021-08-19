@@ -9,7 +9,7 @@ class IntentHandler:
     handler: Coroutine
 
 
-class IntentHandlersCollection(List):
+class IntentHandlersCollection(list):
     def sort_by_priority(self):
         self.sort(key=lambda handler: handler.priority)
 
