@@ -1,8 +1,4 @@
-from bot.bot import Bot
-from bot.dispatcher import Dispatcher
-from bot.request import AliceRequest
-from bot.response import AliceResponse
-
+from bot import Dispatcher, Bot, AliceRequest, AliceResponse
 
 dp = Dispatcher()
 bot = Bot(dp=dp)
