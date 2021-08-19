@@ -1,4 +1,4 @@
-from typing import Optional, List, Coroutine
+from typing import Optional, List, Callable
 
 from bot.consts import DEFAULT_START_TEXT
 from bot.intent_handler import IntentHandlersCollection, IntentHandler
@@ -17,7 +17,7 @@ class Dispatcher:
     def register_message_handler(self,
                                  priority: int,
                                  intent: Optional[str],
-                                 handler: Coroutine):
+                                 handler: Callable):
         intent_handler = IntentHandler(
                         name=intent,
                         priority=priority,
