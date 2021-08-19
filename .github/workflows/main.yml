@@ -3,7 +3,7 @@ name: flake8 Lint
 on: [push, pull_request]
 
 jobs:
-  ci:
+  lint:
     strategy:
       fail-fast: false
       matrix:
@@ -21,11 +21,11 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Poetry install dependencies
-        run: poetry update
-
-  flake8-lint:
-    runs-on: ubuntu-latest
-    name: Lint
-    steps:
-      - name: flake8 Lint
-        uses: py-actions/flake8@v1
+        run: |
+          poetry update
+          python -m pip install --upgrade pip
+          pip install flake8
+      - name: Flake8 Lint
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
