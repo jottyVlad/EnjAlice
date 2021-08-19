@@ -1,3 +1,4 @@
+from bot.consts import DEFAULT_START_TEXT
 from bot.intent_handler import IntentHandlersCollection, IntentHandler
 
 
@@ -6,7 +7,7 @@ class Dispatcher:
         self.intents: IntentHandlersCollection[IntentHandler] = \
             IntentHandlersCollection([])
 
-        self.start_text: str = "There is no start text defined"
+        self.start_text: str = DEFAULT_START_TEXT
 
     def set_start_text(self, text: str):
         self.start_text = text
