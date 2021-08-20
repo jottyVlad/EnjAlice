@@ -1,7 +1,7 @@
 from typing import Optional, List, Callable
 
-from bot.consts import DEFAULT_START_TEXT
-from bot.intent_handler import IntentHandlersCollection, IntentHandler
+from .consts import DEFAULT_START_TEXT
+from .intent_handler import IntentHandlersCollection, IntentHandler
 
 
 class Dispatcher:

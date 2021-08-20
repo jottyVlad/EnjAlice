@@ -3,9 +3,9 @@ from typing import Optional
 
 from aiohttp import web
 
-from bot.dispatcher import Dispatcher
-from bot.request import AliceRequest
-from bot.response import AliceResponse
+from .dispatcher import Dispatcher
+from .request import AliceRequest
+from .response import AliceResponse
 
 
 class Bot:
