@@ -1,15 +1,17 @@
-from typing import Callable, Iterator, Optional
+from typing import Awaitable, Callable, Iterator, Optional
 from bisect import insort
 from collections.abc import MutableSet
 from contextlib import suppress
 
 from pydantic import BaseModel
 
+from .response import AliceResponse
+
 
 class IntentHandler(BaseModel):
     name: Optional[str]
     priority: int
-    handler: Callable
+    handler: Callable[..., Awaitable[Optional[AliceResponse]]]
 
     def __lt__(self, other: "IntentHandler") -> bool:
         if not isinstance(other, IntentHandler):
