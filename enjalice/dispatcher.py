@@ -2,6 +2,9 @@ from typing import Optional, List, Callable
 
 from .consts import DEFAULT_START_TEXT
 from .intent_handler import IntentHandlersCollection, IntentHandler
+from .request import AliceRequest
+from .response import AliceResponse
+from .exceptions import NoHandler
 
 
 class Dispatcher:
@@ -36,3 +39,34 @@ class Dispatcher:
                                               handler=callback)
             return callback
         return decorator
+
+    async def dispatch_request(self, request_obj: AliceRequest) -> AliceResponse:
+        """Process single AliceRequest, return an AliceResponse
+
+        raises NoHandler if all handlers returned None
+        """
+        if request_obj.session.new:
+            # When user starts a new conversation
+            response = AliceResponse()
+            response.response.text = self.dispatcher.start_text
+            return response
+
+        for intent_handler in self.intents:
+            
+            if (intent_handler.name in request_obj.request.nlu.intents)\
+                    or intent_handler.name is None:
+                
+                alice_response = AliceResponse()
+                alice_response.session_state = request_obj.state.session
+                
+                response = await intent_handler.handler(
+                    request_obj,
+                    alice_response
+                )
+                
+                if response is None:
+                    continue
+                
+                return response
+
+        raise NoHandler(f"Can't handle request: {request_obj}")
