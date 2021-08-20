@@ -1,4 +1,4 @@
-from bot import Dispatcher, Bot, AliceRequest, AliceResponse
+from enjalice import Dispatcher, Bot, AliceRequest, AliceResponse
 
 dp = Dispatcher()
 bot = Bot(dp=dp)
