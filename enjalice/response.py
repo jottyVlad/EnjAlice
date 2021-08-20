@@ -1,10 +1,11 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from pydantic import BaseModel, Field
 
 
 class Response(BaseModel):
     text: str = ""
+    tts: Optional[str] = ""
     end_session: bool = False
 
 
