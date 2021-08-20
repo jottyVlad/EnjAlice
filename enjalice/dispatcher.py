@@ -11,9 +11,6 @@ class Dispatcher:
 
         self.start_text: str = DEFAULT_START_TEXT
 
-    def set_start_text(self, text: str):
-        self.start_text = text
-
     def register_message_handler(self,
                                  priority: int,
                                  intent: Optional[str],
