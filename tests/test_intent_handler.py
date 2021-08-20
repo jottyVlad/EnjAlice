@@ -5,6 +5,7 @@ from secrets import token_hex
 import pytest
 
 from enjalice.intent_handler import IntentHandler, IntentHandlersCollection
+from enjalice.response import AliceResponse
 
 
 COLLECTION_SIZE = 16
@@ -13,7 +14,10 @@ COLLECTION_SIZE = 16
 @pytest.fixture
 def collection():
     c = IntentHandlersCollection()
-    handler = lambda: "dummy"
+
+    def handler():
+        return AliceResponse()
+
     for i in range(COLLECTION_SIZE):
         c.add(
             IntentHandler(
@@ -28,19 +32,22 @@ def collection():
 def test_order(collection: IntentHandlersCollection):
     last_priority = float("inf")
     for handler in collection:
-        assert last_priority >= handler.priority, "Order in IntentHandlersCollection is BROKEN"
+        assert last_priority >= handler.priority,\
+            "Order in IntentHandlersCollection is BROKEN"
         last_priority = handler.priority
 
 
 def test_contains(collection: IntentHandlersCollection):
     for i in collection:
-        assert i in collection, "__contains__ method of IntentHandlersCollection is BROKEN"
+        assert i in collection,\
+            "__contains__ method of IntentHandlersCollection is BROKEN"
 
 
 def test_discard(collection: IntentHandlersCollection):
     for i in collection:
         collection.discard(i)
-        assert i not in collection, "discard method of IntentHandlersCollection is BROKEN"
+        assert i not in collection,\
+            "discard method of IntentHandlersCollection is BROKEN"
 
 
 def test_len(collection: IntentHandlersCollection):

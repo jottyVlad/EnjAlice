@@ -1,11 +1,10 @@
-from typing import Awaitable, Callable, Iterator, Optional
+from typing import Iterator, Optional
 from bisect import insort
 from collections.abc import MutableSet
 from contextlib import suppress
 
 from pydantic import BaseModel
 
-from .response import AliceResponse
 from ._hints import MessageHandlerFunction
 
 
@@ -18,6 +17,7 @@ class IntentHandler(BaseModel):
         if not isinstance(other, IntentHandler):
             return NotImplemented
         return self.priority < other.priority
+
     def __gt__(self, other: "IntentHandler") -> bool:
         if not isinstance(other, IntentHandler):
             return NotImplemented
@@ -33,6 +33,7 @@ class IntentHandlersCollection(MutableSet[IntentHandler]):
         """
         assert isinstance(obj, IntentHandler)
         insort(self.__list_of_handlers, obj)
+
     def __contains__(self, obj: IntentHandler) -> bool:
         assert isinstance(obj, IntentHandler)
         return obj in self.__list_of_handlers

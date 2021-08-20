@@ -19,10 +19,10 @@ class Dispatcher:
                                  intent: Optional[str],
                                  handler: Callable):
         intent_handler = IntentHandler(
-                        name=intent,
-                        priority=priority,
-                        handler=handler
-                    )
+            name=intent,
+            priority=priority,
+            handler=handler
+        )
         self.intents.add(intent_handler)
 
     def message_handler(self, priority: int,
@@ -61,12 +61,17 @@ class Dispatcher:
                     alice_response
                 )
 
-                if isinstance(responder, Awaitable):   # Handle async functions
+                # Handle async functions
+                if isinstance(responder, Awaitable):
                     response = await responder
-                elif responder is None or isinstance(responder, AliceResponse):  # Handle sync functions
+
+                # Handle sync functions
+                elif responder is None or isinstance(responder, AliceResponse):
                     response = responder
+
                 else:
                     raise HandlerTypeError(f'Handler returned: {responder}')
+
                 if response is None:
                     continue
 
