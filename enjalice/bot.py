@@ -3,38 +3,29 @@ from typing import Optional
 
 from aiohttp import web
 
-from bot.dispatcher import Dispatcher
-from bot.request import AliceRequest
-from bot.response import AliceResponse
+from .dispatcher import Dispatcher
+from .request import AliceRequest
+from .response import AliceResponse
 
 
 class Bot:
     def __init__(self, dp: Dispatcher):
         self.dispatcher: Dispatcher = dp
-        self._webhook_host: str = ""
-        self._webhook_port: Optional[int] = None
-        self._webhook_path: str = ""
-
-    def set_webhook_host(self, host: str):
-        self._webhook_host = host
-
-    def set_webhook_port(self, port: int):
-        self._webhook_port = port
-
-    def set_webhook_path(self, path: str):
-        self._webhook_path = path
+        self.webhook_host: str = ""
+        self.webhook_port: Optional[int] = None
+        self.webhook_path: str = ""
 
     def run(self):
-        if not self._webhook_host:
+        if not self.webhook_host:
             raise ValueError("You have to set webhook host first! "
                              "Use set_webhook_host method for it")
         app = web.Application()
         app.add_routes([web.post(
-            self._webhook_path, self.handle
+            self.webhook_path, self.handle
         )])
         web.run_app(app=app,
-                    host=self._webhook_host,
-                    port=self._webhook_port)
+                    host=self.webhook_host,
+                    port=self.webhook_port)
 
     async def handle(self, request: web.Request):
         data = await request.json()

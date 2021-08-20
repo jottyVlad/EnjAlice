@@ -1,7 +1,7 @@
 from typing import Optional, List, Callable
 
-from bot.consts import DEFAULT_START_TEXT
-from bot.intent_handler import IntentHandlersCollection, IntentHandler
+from .consts import DEFAULT_START_TEXT
+from .intent_handler import IntentHandlersCollection, IntentHandler
 
 
 class Dispatcher:
@@ -10,9 +10,6 @@ class Dispatcher:
             IntentHandlersCollection([])
 
         self.start_text: str = DEFAULT_START_TEXT
-
-    def set_start_text(self, text: str):
-        self.start_text = text
 
     def register_message_handler(self,
                                  priority: int,
@@ -23,7 +20,7 @@ class Dispatcher:
                         priority=priority,
                         handler=handler
                     )
-        self.intents.append(intent_handler)
+        self.intents.add(intent_handler)
 
     def message_handler(self, priority: int,
                         intent: Optional[List[str]] = None):

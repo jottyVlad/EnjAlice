@@ -1,13 +1,13 @@
-from bot import Dispatcher, Bot, AliceRequest, AliceResponse
+from enjalice import Dispatcher, Bot, AliceRequest, AliceResponse
 
 dp = Dispatcher()
 bot = Bot(dp=dp)
 
-bot.set_webhook_host("127.0.0.1")
-bot.set_webhook_port(8888)
-bot.set_webhook_path("/alice")
+bot.webhook_host = "127.0.0.1"
+bot.webhook_port = 8888
+bot.webhook_path = "/alice"
 
-dp.set_start_text("Привет, я тестовый навык для разработки оболочки над моим API enj-alice")
+dp.start_text = "Привет, я тестовый навык для разработки оболочки над моим API enj-alice"
 
 
 @dp.message_handler(priority=1000, intent=["YANDEX.HELP", "tell_fortunes"])
