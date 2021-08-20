@@ -5,7 +5,6 @@ from aiohttp import web
 
 from .dispatcher import Dispatcher
 from .request import AliceRequest
-from .response import AliceResponse
 
 
 class Bot:

@@ -52,13 +52,10 @@ class Dispatcher:
             return response
 
         for intent_handler in self.intents:
-            
             if (intent_handler.name in request_obj.request.nlu.intents)\
                     or intent_handler.name is None:
-                
                 alice_response = AliceResponse()
                 alice_response.session_state = request_obj.state.session
-                
                 responder = intent_handler.handler(
                     request_obj,
                     alice_response
@@ -70,7 +67,6 @@ class Dispatcher:
                     response = responder
                 else:
                     raise HandlerTypeError(f'Handler returned: {responder}')
-                
                 if response is None:
                     continue
 

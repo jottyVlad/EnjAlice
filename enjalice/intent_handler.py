@@ -18,7 +18,6 @@ class IntentHandler(BaseModel):
         if not isinstance(other, IntentHandler):
             return NotImplemented
         return self.priority < other.priority
-    
     def __gt__(self, other: "IntentHandler") -> bool:
         if not isinstance(other, IntentHandler):
             return NotImplemented
@@ -34,7 +33,6 @@ class IntentHandlersCollection(MutableSet[IntentHandler]):
         """
         assert isinstance(obj, IntentHandler)
         insort(self.__list_of_handlers, obj)
-    
     def __contains__(self, obj: IntentHandler) -> bool:
         assert isinstance(obj, IntentHandler)
         return obj in self.__list_of_handlers
