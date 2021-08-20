@@ -20,7 +20,7 @@ class Dispatcher:
                         priority=priority,
                         handler=handler
                     )
-        self.intents.append(intent_handler)
+        self.intents.add(intent_handler)
 
     def message_handler(self, priority: int,
                         intent: Optional[List[str]] = None):

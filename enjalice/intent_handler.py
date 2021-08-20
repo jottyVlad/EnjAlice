@@ -1,4 +1,7 @@
-from typing import Callable, Optional
+from typing import Callable, Iterator, Optional
+from bisect import insort
+from collections.abc import MutableSet
+from contextlib import suppress
 
 from pydantic import BaseModel
 
@@ -8,11 +11,40 @@ class IntentHandler(BaseModel):
     priority: int
     handler: Callable
 
+    def __lt__(self, other: "IntentHandler") -> bool:
+        if not isinstance(other, IntentHandler):
+            return NotImplemented
+        return self.priority < other.priority
+    
+    def __gt__(self, other: "IntentHandler") -> bool:
+        if not isinstance(other, IntentHandler):
+            return NotImplemented
+        return self.priority > other.priority
 
-class IntentHandlersCollection(list):
-    def priority_sort(self):
-        self.sort(key=lambda handler: handler.priority, reverse=True)
 
-    def append(self, obj) -> None:
-        super().append(obj)
-        self.priority_sort()
+class IntentHandlersCollection(MutableSet[IntentHandler]):
+    def __init__(self) -> None:
+        self.__list_of_handlers = []
+
+    def add(self, obj: IntentHandler) -> None:
+        """Add given IntentHandler to collection
+        """
+        assert isinstance(obj, IntentHandler)
+        insort(self.__list_of_handlers, obj)
+    
+    def __contains__(self, obj: IntentHandler) -> bool:
+        assert isinstance(obj, IntentHandler)
+        return obj in self.__list_of_handlers
+
+    def __iter__(self) -> Iterator[IntentHandler]:
+        return reversed(self.__list_of_handlers)
+
+    def __len__(self):
+        return len(self.__list_of_handlers)
+
+    def discard(self, obj: IntentHandler):
+        """Remove given IntentHandler from collection if it exists
+        """
+        assert isinstance(obj, IntentHandler)
+        with suppress(ValueError):
+            self.__list_of_handlers.pop(self.__list_of_handlers.index(obj))
