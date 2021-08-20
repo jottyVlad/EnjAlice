@@ -1,37 +1,37 @@
 from typing import Dict, Union, List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Interfaces(BaseModel):
-    screen: Dict = {}
-    account_linking: Dict = {}
+    screen: Dict = Field(default_factory=dict)
+    account_linking: Dict = Field(default_factory=dict)
 
 
 class Entity(BaseModel):
-    tokens: Dict[str, int] = {}
+    tokens: Dict[str, int] = Field(default_factory=dict)
     type: str = ''
-    value: Union[int, Dict] = {}
+    value: Union[int, Dict] = Field(default_factory=dict)
 
 
 class Nlu(BaseModel):
-    tokens: List[str] = []
-    entities: List[Entity] = []
-    intents: Dict[str, Dict] = {}
+    tokens: List[str] = Field(default_factory=list)
+    entities: List[Entity] = Field(default_factory=list)
+    intents: Dict[str, Dict] = Field(default_factory=dict)
 
 
 class Meta(BaseModel):
     locale: str = ''
     timezone: str = ''
     client_id: str = ''
-    interfaces: Dict = {}
+    interfaces: Dict = Field(default_factory=dict)
 
 
 class Request(BaseModel):
     command: str = ''
     original_utterance: str = ''
     type: str = ''
-    nlu: Nlu = Nlu()
+    nlu: Nlu = Field(default_factory=Nlu)
 
 
 class User(BaseModel):
@@ -48,20 +48,20 @@ class Session(BaseModel):
     session_id: str = ''
     skill_id: str = ''
     user_id: str = ''
-    application: Application = Application()
-    user: User = User()
+    application: Application = Field(default_factory=Application)
+    user: User = Field(default_factory=User)
     new: bool = False
 
 
 class State(BaseModel):
-    session: Dict = {}
-    user: Dict = {}
-    application: Dict = {}
+    session: Dict = Field(default_factory=dict)
+    user: Dict = Field(default_factory=dict)
+    application: Dict = Field(default_factory=dict)
 
 
 class AliceRequest(BaseModel):
-    request: Request = Request()
-    meta: Meta = Meta()
-    session: Session = Session()
-    state: State = State()
+    request: Request = Field(default_factory=Request)
+    meta: Meta = Field(default_factory=Meta)
+    session: Session = Field(default_factory=Session)
+    state: State = Field(default_factory=State)
     version: str = '1.0'

@@ -1,6 +1,6 @@
 from typing import Dict
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Response(BaseModel):
@@ -10,5 +10,5 @@ class Response(BaseModel):
 
 class AliceResponse(BaseModel):
     response: Response = Response()
-    session_state: Dict = {}
+    session_state: Dict = Field(default_factory=dict)
     version: str = "1.0"
