@@ -6,7 +6,8 @@ from .intent_handler import IntentHandlersCollection, IntentHandler
 
 class Dispatcher:
     def __init__(self):
-        self.intents = IntentHandlersCollection([])
+        self.intents: IntentHandlersCollection = \
+            IntentHandlersCollection()
 
         self.start_text: str = DEFAULT_START_TEXT
 
