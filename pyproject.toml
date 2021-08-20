@@ -6,7 +6,7 @@ authors = ["jotty <bard143games@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-aiohttp = "^3.7.4"
+aiohttp = {extras = ["speedups"], version = "^3.7.4"}
 pydantic = "^1.8.2"
 
 [tool.poetry.dev-dependencies]
