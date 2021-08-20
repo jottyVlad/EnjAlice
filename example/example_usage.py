@@ -16,6 +16,7 @@ async def handle_help(request: AliceRequest,
     # Here we can process data in request
     # Then fill data in response
     response.response.text = "У меня пока что нет команд, но они обязательно будут!"
+    response.response.tts = "Этот текст говорит, что у меня пока что нет команд!"
     # And return AliceResponse object
     return response
 
