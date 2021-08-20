@@ -1,10 +1,10 @@
-from typing import Optional, List, Callable
+from typing import Optional, List, Callable, Awaitable
 
 from .consts import DEFAULT_START_TEXT
 from .intent_handler import IntentHandlersCollection, IntentHandler
 from .request import AliceRequest
 from .response import AliceResponse
-from .exceptions import NoHandler
+from .exceptions import NoHandler, HandlerTypeError
 
 
 class Dispatcher:
@@ -59,14 +59,21 @@ class Dispatcher:
                 alice_response = AliceResponse()
                 alice_response.session_state = request_obj.state.session
                 
-                response = await intent_handler.handler(
+                responder = intent_handler.handler(
                     request_obj,
                     alice_response
                 )
+
+                if isinstance(responder, Awaitable):   # Handle async functions
+                    response = await responder
+                elif responder is None or isinstance(responder, AliceResponse):  # Handle sync functions
+                    response = responder
+                else:
+                    raise HandlerTypeError(f'Handler returned: {responder}')
                 
                 if response is None:
                     continue
-                
+
                 return response
 
         raise NoHandler(f"Can't handle request: {request_obj}")

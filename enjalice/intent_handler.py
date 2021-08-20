@@ -6,12 +6,13 @@ from contextlib import suppress
 from pydantic import BaseModel
 
 from .response import AliceResponse
+from ._hints import MessageHandlerFunction
 
 
 class IntentHandler(BaseModel):
     name: Optional[str]
     priority: int
-    handler: Callable[..., Awaitable[Optional[AliceResponse]]]
+    handler: MessageHandlerFunction
 
     def __lt__(self, other: "IntentHandler") -> bool:
         if not isinstance(other, IntentHandler):
