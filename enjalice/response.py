@@ -9,7 +9,7 @@ def get_session_state() -> Dict:
     """Get current session from context or empty dict
     """
     session = context.session_state.get()
-    return session.copy() or dict()
+    return session.copy() if session else dict()
 
 
 class Response(BaseModel):
