@@ -1,18 +1,21 @@
 [tool.poetry]
 name = "enj-alice"
-version = "0.1.0"
+version = "2.0.0"
 description = "EnjAlice is a asynchronous framework for Yandex Alice API"
 authors = ["jotty <bard143games@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-aiohttp = {extras = ["speedups"], version = "^3.7.4"}
+aiohttp = {extras = ["speedups"], version = "^3.7.4", optional = true}
 pydantic = "^1.8.2"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
 pytest = "^6.2.4"
 pytest-asyncio = "^0.15.1"
+
+[tool.poetry.extras]
+aiohttp = ["aiohttp"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

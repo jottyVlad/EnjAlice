@@ -1,6 +1,9 @@
-from enjalice import Dispatcher, Bot, AliceRequest
-from enjalice.consts import Sounds
+from aiohttp import web
+from enjalice.dispatcher import Dispatcher
+from enjalice.request import AliceRequest
 from enjalice.response import text
+
+from aiohttp_server import app
 
 
 async def start_handler(_: AliceRequest):
@@ -10,15 +13,10 @@ async def start_handler(_: AliceRequest):
 
 
 dp = Dispatcher(start_handler)
-bot = Bot(dp=dp)
-
-bot.webhook_host = "127.0.0.1"
-bot.webhook_port = 8888
-bot.webhook_path = "/alice"
 
 
 @dp.message_handler(priority=1000, intent=["YANDEX.HELP"])
-async def handle_help(request: AliceRequest):
+async def handle_help(_: AliceRequest):
     return text(
         msg="У меня пока что нет команд, но они обязательно будут!",
         tts="Этот текст говорит, что у меня пока что нет команд!"
@@ -26,4 +24,5 @@ async def handle_help(request: AliceRequest):
 
 
 if __name__ == '__main__':
-    bot.run()
+    app['dp'] = dp
+    web.run_app(app)
