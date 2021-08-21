@@ -7,7 +7,7 @@ from enjalice.request import AliceRequest, State
 
 @pytest.fixture
 def dp() -> Dispatcher:
-    d = Dispatcher()
+    d = Dispatcher(lambda _: AliceResponse())
 
     @d.message_handler(priority=0, intent=['TEST.INTENT.ASYNC'])
     async def test_1(_):

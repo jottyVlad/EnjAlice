@@ -14,5 +14,3 @@ MessageHandlerFunction = Callable[
         Awaitable[HandlerResult]
     ]
 ]
-
-StartDialogHandlerFunction = Callable
