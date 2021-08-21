@@ -1,5 +1,4 @@
 from enjalice import Dispatcher, Bot, AliceRequest
-from enjalice.consts import Sounds
 from enjalice.response import text
 
 
@@ -14,12 +13,9 @@ dp.start_text = \
     "Привет, я тестовый навык для разработки оболочки над моим API enj-alice"
 
 
-@dp.message_handler(priority=1000, intent=["YANDEX.HELP"])
-async def handle_help(request: AliceRequest):
-    return text(
-        msg="У меня пока что нет команд, но они обязательно будут!",
-        tts="Этот текст говорит, что у меня пока что нет команд!"
-    )
+@dp.message_handler(priority=100)
+def handle_fallback(_: AliceRequest):
+    return text(msg="Сработал фоллбек!")
 
 
 if __name__ == '__main__':
