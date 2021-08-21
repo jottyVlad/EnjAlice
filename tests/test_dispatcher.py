@@ -43,7 +43,7 @@ async def test_sync_async(dp: Dispatcher):
 @pytest.mark.asyncio
 async def test_session_state(dp: Dispatcher):
     session = {'test': 42}
-    state = State(session={'test': 42})
+    state = State(session=session)
     async for resp in call_handlers(dp, state=state):
         assert resp.session_state['test'] == 42
         assert resp.session_state is not session
