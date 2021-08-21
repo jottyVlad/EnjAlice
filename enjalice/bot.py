@@ -17,6 +17,9 @@ class Bot:
         if not self.webhook_host:
             raise ValueError("You have to set webhook host first! "
                              "Use set_webhook_host method for it")
+        if not self.dispatcher.start_dialog_handler:
+            raise ValueError("You have to define start dialog handler")
+
         app = web.Application()
         app.add_routes([web.post(
             self.webhook_path, self.handle
