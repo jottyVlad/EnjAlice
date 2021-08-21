@@ -1,9 +1,8 @@
 import pytest
 
 from enjalice import Dispatcher
-from enjalice import request
 from enjalice.response import AliceResponse, text
-from enjalice.request import AliceRequest, Request, State, Nlu
+from enjalice.request import AliceRequest, State
 
 
 @pytest.fixture
