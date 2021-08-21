@@ -1,5 +1,6 @@
 from typing import Optional, List, Callable, Awaitable
 
+from ._hints import StartDialogHandlerFunction
 from .consts import DEFAULT_START_TEXT
 from .intent_handler import IntentHandlersCollection, IntentHandler
 from .request import AliceRequest
@@ -14,7 +15,7 @@ class Dispatcher:
         self.intents: IntentHandlersCollection = \
             IntentHandlersCollection()
 
-        self.start_text: str = DEFAULT_START_TEXT
+        self.start_dialog_handler: Optional[Callable] = None
 
     def register_message_handler(self,
                                  priority: int,
@@ -26,6 +27,15 @@ class Dispatcher:
             handler=handler
         )
         self.intents.add(intent_handler)
+
+    def start_handler(self):
+        def decorator(callback):
+            if isinstance(callback, StartDialogHandlerFunction):
+                self.start_dialog_handler = callback
+            else:
+                raise HandlerTypeError
+            return callback
+        return decorator
 
     def message_handler(self, priority: int,
                         intent: Optional[List[str]] = None):
@@ -50,7 +60,21 @@ class Dispatcher:
 
         if request_obj.session.new:
             # When user starts a new conversation
-            return text(msg=self.start_text)
+            responder = self.start_dialog_handler(
+                request_obj
+            )
+
+            # Handle async functions
+            if isinstance(responder, Awaitable):
+                response = await responder
+
+            # Handle sync functions
+            elif responder is None or isinstance(responder, AliceResponse):
+                response = responder
+            else:
+                raise HandlerTypeError(f'Handler returned: {responder}')
+
+            return response
 
         context.session_state.set(request_obj.state.session)
 
