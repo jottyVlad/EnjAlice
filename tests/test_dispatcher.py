@@ -11,11 +11,11 @@ def dp() -> Dispatcher:
     d = Dispatcher()
 
     @d.message_handler(priority=0, intent=['TEST.INTENT.ASYNC'])
-    async def test_1(request: AliceRequest):
+    async def test_1(_):
         return text("Test handler 1")
 
     @d.message_handler(priority=1, intent=['TEST.INTENT.SYNC'])
-    def test_2(request: AliceRequest):
+    def test_2(_):
         return text("Test handler 2")
 
     return d
