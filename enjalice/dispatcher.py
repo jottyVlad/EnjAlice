@@ -50,7 +50,7 @@ class Dispatcher:
 
         if request_obj.session.new:
             # When user starts a new conversation
-            return text(msg=self.dispatcher.start_text)
+            return text(msg=self.start_text)
 
         context.session_state.set(request_obj.state.session)
 
