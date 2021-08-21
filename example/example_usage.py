@@ -10,8 +10,12 @@ bot.webhook_host = "127.0.0.1"
 bot.webhook_port = 8888
 bot.webhook_path = "/alice"
 
-dp.start_text = \
-    "Привет, я тестовый навык для разработки оболочки над моим API enj-alice"
+
+@dp.start_handler()
+async def start_handler(_: AliceRequest):
+    return text(
+        msg="Привет, я тестовый навык для разработки оболочки над моим API enj-alice"
+    )
 
 
 @dp.message_handler(priority=1000, intent=["YANDEX.HELP"])
