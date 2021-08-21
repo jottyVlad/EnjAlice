@@ -1,6 +1,10 @@
-from enjalice import Dispatcher, Bot, AliceRequest
+from aiohttp import web
+from enjalice.dispatcher import Dispatcher
+from enjalice.request import AliceRequest
 from enjalice.consts import Sounds
 from enjalice.response import text
+
+from aiohttp_server import app
 
 
 async def start_handler(_: AliceRequest):
@@ -10,11 +14,6 @@ async def start_handler(_: AliceRequest):
 
 
 dp = Dispatcher(start_handler)
-bot = Bot(dp=dp)
-
-bot.webhook_host = "127.0.0.1"
-bot.webhook_port = 8888
-bot.webhook_path = "/alice"
 
 
 @dp.message_handler(priority=150, intent=["tell_fortunes"])
@@ -26,4 +25,5 @@ async def handler_tell_fortunes_sound(_: AliceRequest):
 
 
 if __name__ == '__main__':
-    bot.run()
+    app['dp'] = dp
+    web.run_app(app)
