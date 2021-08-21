@@ -1,6 +1,6 @@
 import pytest
 
-from enjalice import Dispatcher
+from enjalice.dispatcher import Dispatcher
 from enjalice.response import AliceResponse, text
 from enjalice.request import AliceRequest, State
 
