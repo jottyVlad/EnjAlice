@@ -14,11 +14,11 @@ dp.start_text = \
     "Привет, я тестовый навык для разработки оболочки над моим API enj-alice"
 
 
-@dp.message_handler(priority=1000, intent=["YANDEX.HELP"])
-async def handle_help(request: AliceRequest):
+@dp.message_handler(priority=150, intent=["tell_fortunes"])
+async def handler_tell_fortunes_sound(_: AliceRequest):
     return text(
-        msg="У меня пока что нет команд, но они обязательно будут!",
-        tts="Этот текст говорит, что у меня пока что нет команд!"
+        msg="Сейчас погадаю",
+        tts=Sounds.Bell1 + "Гадание для Вас - Вы сегодня хороший"
     )
 
 
