@@ -1,4 +1,6 @@
-from enjalice import Dispatcher, Bot, AliceRequest, AliceResponse
+from enjalice import Dispatcher, Bot, AliceRequest
+from enjalice.response import text
+
 
 dp = Dispatcher()
 bot = Bot(dp=dp)
@@ -12,23 +14,17 @@ dp.start_text = \
 
 
 @dp.message_handler(priority=1000, intent=["YANDEX.HELP", "tell_fortunes"])
-async def handle_help(request: AliceRequest,
-                      response: AliceResponse):
-    # Here we can process data in request
-    # Then fill data in response
-    response.response.text = \
-        "У меня пока что нет команд, но они обязательно будут!"
-    response.response.tts = \
-        "Этот текст говорит, что у меня пока что нет команд!"
-    # And return AliceResponse object
-    return response
+async def handle_help(request: AliceRequest):
+    return text(
+        msg="У меня пока что нет команд, но они обязательно будут!",
+        tts="Этот текст говорит, что у меня пока что нет команд!"
+    )
 
 
 @dp.message_handler(priority=100)
-async def handle_fallback(request: AliceRequest,
-                          response: AliceResponse):
-    response.response.text = "Сработал фоллбек!"
-    # And return AliceResponse object
-    return response
+def handle_fallback(request: AliceRequest):
+    return text(msg="Сработал фоллбек!")
 
-bot.run()
+
+if __name__ == '__main__':
+    bot.run()

@@ -3,11 +3,13 @@ from typing import Optional, List, Callable, Awaitable
 from .consts import DEFAULT_START_TEXT
 from .intent_handler import IntentHandlersCollection, IntentHandler
 from .request import AliceRequest
-from .response import AliceResponse
+from .response import AliceResponse, text
 from .exceptions import NoHandler, HandlerTypeError
+from . import context
 
 
 class Dispatcher:
+
     def __init__(self):
         self.intents: IntentHandlersCollection = \
             IntentHandlersCollection()
@@ -45,20 +47,19 @@ class Dispatcher:
 
         raises NoHandler if all handlers returned None
         """
+
         if request_obj.session.new:
             # When user starts a new conversation
-            response = AliceResponse()
-            response.response.text = self.dispatcher.start_text
-            return response
+            return text(msg=self.dispatcher.start_text)
+
+        context.session_state.set(request_obj.state.session)
 
         for intent_handler in self.intents:
             if (intent_handler.name in request_obj.request.nlu.intents)\
                     or intent_handler.name is None:
-                alice_response = AliceResponse()
-                alice_response.session_state = request_obj.state.session
+
                 responder = intent_handler.handler(
-                    request_obj,
-                    alice_response
+                    request_obj
                 )
 
                 # Handle async functions
