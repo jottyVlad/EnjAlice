@@ -14,10 +14,4 @@ MessageHandlerFunction = Callable[
     ]
 ]
 
-StartDialogHandlerFunction = Callable[
-    ...,
-    Union[
-        HandlerResult,
-        Awaitable[HandlerResult]
-    ]
-]
+StartDialogHandlerFunction = Callable
