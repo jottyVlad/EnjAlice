@@ -1,4 +1,4 @@
-from typing import TypeVar, List, Optional
+from typing import TypeVar, List, Optional, Literal
 
 from pydantic import BaseModel, Field
 
@@ -12,7 +12,7 @@ class Card(BaseModel):
 
 
 class BigImage(Card):
-    type = "BigImage"
+    type: Literal["BigImage"] = "BigImage"
     image_id: str
     title: Optional[str]
     description: Optional[str]
@@ -20,12 +20,12 @@ class BigImage(Card):
 
 
 class ItemsList(Card):
-    type = "ItemsList"
+    type: Literal["ItemsList"] = "ItemsList"
     header: Optional[Header] = Field(default_factory=Header)
     items: List[ImageWithButton] = Field(default_factory=list)
     footer: Optional[Footer] = Field(default_factory=Footer)
 
 
 class ImageGallery(Card):
-    type = "ImageGallery"
+    type: Literal["ImageGallery"] = "ImageGallery"
     items: List[ImageWithoutButton] = Field(default_factory=list)
