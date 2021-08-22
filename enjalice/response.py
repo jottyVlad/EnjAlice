@@ -3,8 +3,8 @@ from typing import Dict, Optional, Generic, List
 from pydantic import BaseModel, Field
 
 from . import context
-from .applications.button import ResponseButton
-from .applications.cards import CT
+from .attachments.button import ResponseButton
+from .attachments.cards import CT
 
 
 def get_session_state() -> Dict:
