@@ -1,12 +1,11 @@
 from typing import Optional, List, Callable, Awaitable
 
+from . import context
 from ._hints import MessageHandlerFunction
-from .consts import DEFAULT_START_TEXT
+from .exceptions import NoHandler, HandlerTypeError
 from .intent_handler import IntentHandlersCollection, IntentHandler
 from .request import AliceRequest
-from .response import AliceResponse, text
-from .exceptions import NoHandler, HandlerTypeError
-from . import context
+from .response import AliceResponse
 
 
 class Dispatcher:
@@ -35,6 +34,7 @@ class Dispatcher:
             else:
                 raise HandlerTypeError
             return callback
+
         return decorator
 
     def message_handler(self, priority: int,
@@ -50,6 +50,7 @@ class Dispatcher:
                                               intent=None,
                                               handler=callback)
             return callback
+
         return decorator
 
     async def _get_response(self,
