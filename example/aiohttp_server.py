@@ -4,7 +4,7 @@ from enjalice.request import AliceRequest
 
 async def handle(request: web.Request):
     data = await request.json()
-    response = await request['dp'].dispatch_request(
+    response = await request.app['dp'].dispatch_request(
         AliceRequest.parse_obj(data)
     )
     return web.json_response(response.dict())
