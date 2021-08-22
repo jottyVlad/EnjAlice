@@ -1,10 +1,12 @@
-from typing import Dict, Optional, Generic, List
+from typing import Dict, Optional, Generic, List, TypeVar
 
 from pydantic import BaseModel, Field
 
 from . import context
 from .attachments.button import ResponseButton
-from .attachments.cards import CT
+from .attachments.cards import Card
+
+CT = TypeVar('CT', bound=Card)
 
 
 def get_session_state() -> Dict:

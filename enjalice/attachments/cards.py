@@ -11,9 +11,6 @@ class Card(BaseModel):
     type: str
 
 
-CT = TypeVar('CT', bound=Card)
-
-
 class BigImage(Card):
     type = "BigImage"
     image_id: str
