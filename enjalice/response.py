@@ -1,8 +1,10 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Generic, List
 
 from pydantic import BaseModel, Field
 
 from . import context
+from .applications.button import ResponseButton
+from .applications.cards import CT
 
 
 def get_session_state() -> Dict:
@@ -12,9 +14,11 @@ def get_session_state() -> Dict:
     return session.copy() if session else dict()
 
 
-class Response(BaseModel):
+class Response(BaseModel, Generic[CT]):
     text: str = ""
     tts: Optional[str] = ""
+    card: Optional[CT]
+    buttons: List[ResponseButton] = Field(default_factory=list)
     end_session: bool = False
 
 
