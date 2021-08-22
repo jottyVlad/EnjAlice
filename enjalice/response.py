@@ -1,8 +1,12 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Generic, List, TypeVar
 
 from pydantic import BaseModel, Field
 
 from . import context
+from .attachments.button import ResponseButton
+from .attachments.cards import Card
+
+CT = TypeVar('CT', bound=Card)
 
 
 def get_session_state() -> Dict:
@@ -12,9 +16,11 @@ def get_session_state() -> Dict:
     return session.copy() if session else dict()
 
 
-class Response(BaseModel):
+class Response(BaseModel, Generic[CT]):
     text: str = ""
     tts: Optional[str] = ""
+    card: Optional[CT]
+    buttons: List[ResponseButton] = Field(default_factory=list)
     end_session: bool = False
 
 

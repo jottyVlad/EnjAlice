@@ -1,7 +1,7 @@
-from typing import Iterator, Optional
 from bisect import insort
 from collections.abc import MutableSet
 from contextlib import suppress
+from typing import Iterator, Optional
 
 from pydantic import BaseModel
 

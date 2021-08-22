@@ -1,11 +1,9 @@
 from typing import Callable, Awaitable, Optional, Union
 
-from .response import AliceResponse
 from .request import AliceRequest
-
+from .response import AliceResponse
 
 HandlerResult = Optional[AliceResponse]
-
 
 MessageHandlerFunction = Callable[
     [AliceRequest],
