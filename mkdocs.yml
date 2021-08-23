@@ -3,14 +3,14 @@ site_description: Фреймворк для Яндекс.Алисы
 site_author: Jotty
 repo_name: jottyVlad/EnjAlice
 repo_url: https://github.com/jottyVlad/EnjAlice
-edit_uri: edit/v3.0/docs/
+edit_uri: edit/v2/docs/
 
 extra:
   disqus: ""
   social:
     - icon: fontawesome/brands/telegram
-      link: https://t.me/vkbottle_ru
-      name: our chat
+      link: https://t.me/enjalice_news
+      name: Новости про обертку
 
 nav:
   - Главная: index.md
