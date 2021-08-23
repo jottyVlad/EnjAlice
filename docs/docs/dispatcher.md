@@ -35,6 +35,7 @@ dispatcher.register_message_handler(
 
 ### Регистрация нового интента декоратором
 `@dispatcher.message_handler(priority, intent)`
+
 - `priority: int` - приоритет хендлера.
 - `intent: Optional[str]` - название интента 
 (как указано в настройках Диалога). Если не указан - хендлер 
@@ -45,6 +46,7 @@ dispatcher.register_message_handler(
 
 ### Обработчик запроса
 `dispatcher.dispatch_request(request_obj)`
+
 - `request_obj: AliceRequest` - объект запроса.
 - Возвращает `AliceResponse` - итоговый объект ответа после
 обработки.
