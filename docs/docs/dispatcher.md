@@ -45,6 +45,7 @@ dispatcher.register_message_handler(
 
 ### Обработчик запроса
 `dispatcher.dispatch_request(request_obj)`
+
 - `request_obj: AliceRequest` - объект запроса.
 - Возвращает `AliceResponse` - итоговый объект ответа после
 обработки.
