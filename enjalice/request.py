@@ -6,6 +6,8 @@ from pydantic import BaseModel, Field
 class Interfaces(BaseModel):
     screen: Dict = Field(default_factory=dict)
     account_linking: Dict = Field(default_factory=dict)
+    payments: Dict = Field(default_factory=dict)
+    audio_player: Dict = Field(default_factory=dict)
 
 
 class Entity(BaseModel):
@@ -24,7 +26,7 @@ class Meta(BaseModel):
     locale: str = ''
     timezone: str = ''
     client_id: str = ''
-    interfaces: Dict = Field(default_factory=dict)
+    interfaces: Interfaces = Field(default_factory=Interfaces)
 
 
 class Request(BaseModel):
