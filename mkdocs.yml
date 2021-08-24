@@ -16,12 +16,16 @@ nav:
   - Главная: index.md
   - Документация:
       - Dispatcher: docs/dispatcher.md
-      - Intent Handler: docs/intent_handler.md
+      - Request: docs/request.md
+      - Response: docs/response.md
       - Вложения:
           - Card: docs/attachments/cards.md
           - Кнопки: docs/attachments/buttons.md
           - Изображения: docs/attachments/images.md
           - Мета: docs/attachments/meta.md
+      - Internals:
+          - Intent Handler: docs/internals/intent_handler.md
+          - Type Hints: docs/internals/type_hints.md
 
 theme:
   name: material
