@@ -1,4 +1,4 @@
-from typing import Dict, Union, List, Optional
+from typing import Dict, Optional, List, Union
 
 from pydantic import BaseModel, Field
 
@@ -61,9 +61,5 @@ class State(BaseModel):
     application: Dict = Field(default_factory=dict)
 
 
-class AliceRequest(BaseModel):
-    request: Request = Field(default_factory=Request)
-    meta: Meta = Field(default_factory=Meta)
-    session: Session = Field(default_factory=Session)
-    state: State = Field(default_factory=State)
-    version: str = '1.0'
+class Markup(BaseModel):
+    dangerous_context: bool = Field(default=False)
