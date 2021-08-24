@@ -1,7 +1,7 @@
 # Type Hints
 
-- `HandlerResult = Optional[AliceResponse]`
-- 
+`HandlerResult = Optional[AliceResponse]`
+
 ```
   MessageHandlerFunction = Callable[
     [AliceRequest],
@@ -11,4 +11,5 @@
     ] 
 ]
 ```
-- `CT = TypeVar('CT', bound=Card)`
+
+`CT = TypeVar('CT', bound=Card)`
