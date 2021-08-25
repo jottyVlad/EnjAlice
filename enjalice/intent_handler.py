@@ -1,7 +1,9 @@
 from bisect import insort
 from collections.abc import MutableSet
 from contextlib import suppress
-from typing import Iterator, Optional
+from typing import Iterator, Optional, Iterable
+from collections import defaultdict
+from itertools import zip_longest
 
 from pydantic import BaseModel
 
@@ -26,27 +28,39 @@ class IntentHandler(BaseModel):
 
 class IntentHandlersCollection(MutableSet[IntentHandler]):
     def __init__(self) -> None:
-        self.__list_of_handlers = []
+        self.__handlers: Dict[Optional[str], IntentHandler] = defaultdict(list)
 
     def add(self, obj: IntentHandler) -> None:
         """Add given IntentHandler to collection
         """
         assert isinstance(obj, IntentHandler)
-        insort(self.__list_of_handlers, obj)
+        insort(self.__handlers[obj.name], obj)
 
     def __contains__(self, obj: IntentHandler) -> bool:
         assert isinstance(obj, IntentHandler)
-        return obj in self.__list_of_handlers
+        return any(obj in b for b in self.__handlers.values())
 
     def __iter__(self) -> Iterator[IntentHandler]:
-        return reversed(self.__list_of_handlers)
+        buckets = map(reversed, self.__handlers.values())
+        for batch in zip_longest(*buckets):
+            for handler in sorted(filter(lambda i: i is not None, batch), reverse=True):
+                yield handler
 
     def __len__(self):
-        return len(self.__list_of_handlers)
+        return sum(map(len, self.__handlers.values()))  # TODO doesnt actually count number of unique handlers
 
+    def iter_intents(self, intents: Iterable[str], allow_fallback=True) -> Iterator[IntentHandler]:
+        intent_buckets = [self.__handlers[i] for i in intents]
+        if allow_fallback:
+            intent_buckets.append(self.__handlers[None])
+        for batch in zip_longest(*intent_buckets):
+            for handler in sorted(filter(lambda i: i is not None, batch)):
+                yield handler
+    
     def discard(self, obj: IntentHandler):
         """Remove given IntentHandler from collection if it exists
         """
         assert isinstance(obj, IntentHandler)
-        with suppress(ValueError):
-            self.__list_of_handlers.pop(self.__list_of_handlers.index(obj))
+        for i in self.__handlers.values():
+            with suppress(ValueError):
+                i.remove(obj)
