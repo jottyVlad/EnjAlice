@@ -1,7 +1,7 @@
 from bisect import insort
 from collections.abc import MutableSet
 from contextlib import suppress
-from typing import Iterator, Optional, Iterable
+from typing import Iterator, Optional, Iterable, Dict
 from collections import defaultdict
 from itertools import zip_longest
 
