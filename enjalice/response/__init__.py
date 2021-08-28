@@ -2,7 +2,8 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel, Field
 
-from .response import Response, get_session_state
+from .response import Response
+from ..context import get_session_state
 from .response_models import Analytics
 
 
