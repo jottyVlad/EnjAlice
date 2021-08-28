@@ -45,7 +45,7 @@ class DirectiveStartPurchase(BaseModel):
 
 
 class DirectiveConfirmPurchase(BaseModel):
-    confirm_purchase = {}
+    confirm_purchase: Dict = Field(default_factory=dict)
 
 
 class Event(BaseModel):
