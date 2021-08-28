@@ -25,7 +25,7 @@ class Product(BaseModel):
     title: str
     user_price: float
     price: float
-    nds_type: str
+    nds_type: NdsType
     quantity: float
 
 
@@ -36,8 +36,8 @@ class DirectiveStartPurchase(BaseModel):
     image_url: Optional[str]
     caption: str
     description: str
-    currency: str
-    type: str
+    currency: Currency
+    type: PurchaseType
     payload: Dict = Field(default_factory=dict)
     merchant_key: str
     test_payment: bool = Field(default=False)
