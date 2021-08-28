@@ -1,14 +1,14 @@
+import dataclasses
 from bisect import insort
 from collections.abc import MutableSet
 from contextlib import suppress
 from typing import Iterator, Optional
 
-from pydantic import BaseModel
-
 from ._hints import MessageHandlerFunction
 
 
-class IntentHandler(BaseModel):
+@dataclasses.dataclass
+class IntentHandler:
     name: Optional[str]
     priority: int
     handler: MessageHandlerFunction
