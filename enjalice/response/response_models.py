@@ -46,3 +46,12 @@ class DirectiveStartPurchase(BaseModel):
 
 class DirectiveConfirmPurchase(BaseModel):
     confirm_purchase = {}
+
+
+class Event(BaseModel):
+    name: str
+    value: Optional[Dict]
+
+
+class Analytics(BaseModel):
+    events: List[Event]

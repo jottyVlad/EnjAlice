@@ -5,7 +5,8 @@ from pydantic import BaseModel, Field
 from enjalice import context
 from enjalice.attachments.button import ResponseButton
 from enjalice.attachments.cards import Card
-from .response_models import DirectiveStartPurchase, DirectiveConfirmPurchase
+from .response_models import DirectiveStartPurchase, \
+    DirectiveConfirmPurchase
 
 CT = TypeVar('CT', bound=Card)
 
