@@ -3,7 +3,7 @@ from typing import Dict, Optional
 from pydantic import BaseModel, Field
 
 from .response import Response
-from .response_models import Analytics
+from .response_models import Analytics, VoiceEffects
 from ..context import get_session_state
 
 
@@ -20,11 +20,40 @@ class AliceResponse(BaseModel):
         Добавляет кастомное аудио к текущему tts
         :param skill_id: ID навыка
         :param sound_id: ID аудиофайла
-        :return: AliceResponse (self)
+        :return: self
         """
 
+        if not (isinstance(skill_id, str) and isinstance(sound_id, str)):
+            raise AttributeError(f"skill_id and sound_id must be str")
         self.response.tts += \
             f" <speaker audio='dialogs-upload/{skill_id}/{sound_id}.opus'> "
+        return self
+
+    def add_voice_effect(self, effect: VoiceEffects, text: str):
+        """
+        Добавляет текст с эффектом к текущему tts
+        :param effect: Эффект из перечисления VoiceEffects
+        :param text: Текст
+        :return: self
+        """
+
+        if not isinstance(text, str):
+            raise AttributeError(f"text must be str")
+        self.response.tts += \
+            f"<speaker effect={effect}>{text} <speaker effect='-'>"
+        return self
+
+    def add_pause(self, ms: int):
+        """
+        Добавляет паузу к текущему tts
+        :param ms: Длительность паузы (в миллисекундах)
+        :return: self
+        """
+
+        if not isinstance(ms, int):
+            raise AttributeError("ms must be int")
+        self.response.tts += \
+            f"sil <[{ms}]>"
         return self
 
 
