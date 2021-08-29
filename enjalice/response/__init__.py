@@ -13,6 +13,18 @@ class AliceResponse(BaseModel):
     session_state: Dict = Field(default_factory=get_session_state)
     version: str = "1.0"
 
+    def add_custom_sound(self, skill_id: str, sound_id: str):
+        """
+        Добавляет кастомное аудио к текущему tts
+        :param skill_id: ID навыка
+        :param sound_id: ID аудиофайла
+        :return: AliceResponse (self)
+        """
+
+        self.response.tts += \
+            f" <speaker audio='dialogs-upload/{skill_id}/{sound_id}.opus'> "
+        return self
+
 
 def text(msg: str, tts: str = "", end_session: bool = False) -> AliceResponse:
     """Create new AliceResponse from text
