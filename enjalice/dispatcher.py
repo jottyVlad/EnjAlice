@@ -84,12 +84,7 @@ class Dispatcher:
             # When user starts a new conversation
             response = await self._get_response(self.start_dialog_handler, request_obj)
         else:
-            intents = filter(
-                lambda i: any([i.name in request_obj.request.nlu.intents,
-                               i.name is None]),
-                self.intents
-            )
-            for intent_handler in intents:
+            for intent_handler in self.intents.iter_intents(request_obj.request.nlu.intents):
                 response = await self._get_response(intent_handler.handler,
                                                     request_obj)
                 if response is not None:

@@ -1,0 +1,42 @@
+site_name: EnjAlice
+site_description: Фреймворк для Яндекс.Алисы
+site_author: Jotty
+repo_name: jottyVlad/EnjAlice
+repo_url: https://github.com/jottyVlad/EnjAlice
+edit_uri: edit/v2/docs/
+
+extra:
+  disqus: ""
+  social:
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/enjalice_news
+      name: Новости про обертку
+
+nav:
+  - Главная: index.md
+  - Changelog: changelog.md
+  - Документация:
+      - Dispatcher: docs/dispatcher.md
+      - Request: docs/request.md
+      - Response: docs/response.md
+      - Вложения:
+          - Card: docs/attachments/cards.md
+          - Кнопки: docs/attachments/buttons.md
+          - Изображения: docs/attachments/images.md
+          - Мета: docs/attachments/meta.md
+      - Internals:
+          - Intent Handler: docs/internals/intent_handler.md
+          - Type Hints: docs/internals/type_hints.md
+
+theme:
+  name: material
+  language: ru
+
+  palette:
+    scheme: preference
+    primary: black
+    accent: blue
+
+  font:
+    text: Roboto Mono
+    code: Monaco

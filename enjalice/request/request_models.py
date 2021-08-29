@@ -1,4 +1,4 @@
-from typing import Dict, Union, List, Optional
+from typing import Dict, Optional, List, Union
 
 from pydantic import BaseModel, Field
 
@@ -6,10 +6,17 @@ from pydantic import BaseModel, Field
 class Interfaces(BaseModel):
     screen: Dict = Field(default_factory=dict)
     account_linking: Dict = Field(default_factory=dict)
+    payments: Dict = Field(default_factory=dict)
+    audio_player: Dict = Field(default_factory=dict)
+
+
+class EntityToken(BaseModel):
+    start: int
+    end: int
 
 
 class Entity(BaseModel):
-    tokens: Dict[str, int] = Field(default_factory=dict)
+    tokens: EntityToken = Field(default_factory=EntityToken)
     type: str = ''
     value: Union[int, Dict] = Field(default_factory=dict)
 
@@ -24,7 +31,7 @@ class Meta(BaseModel):
     locale: str = ''
     timezone: str = ''
     client_id: str = ''
-    interfaces: Dict = Field(default_factory=dict)
+    interfaces: Interfaces = Field(default_factory=Interfaces)
 
 
 class Request(BaseModel):
@@ -59,9 +66,5 @@ class State(BaseModel):
     application: Dict = Field(default_factory=dict)
 
 
-class AliceRequest(BaseModel):
-    request: Request = Field(default_factory=Request)
-    meta: Meta = Field(default_factory=Meta)
-    session: Session = Field(default_factory=Session)
-    state: State = Field(default_factory=State)
-    version: str = '1.0'
+class Markup(BaseModel):
+    dangerous_context: bool = Field(default=False)
