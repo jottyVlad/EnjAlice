@@ -55,3 +55,27 @@ class Event(BaseModel):
 
 class Analytics(BaseModel):
     events: List[Event]
+
+
+class VoiceEffects(str, Enum):
+    """
+    Перечисление доступных голосовых эффектов. \n
+    https://yandex.ru/dev/dialogs/alice/doc/speech-effects.html
+
+    Доступные значения:
+
+    behind_the_wall - голос из-за стены \n
+    hamster — голос хомяка \n
+    megaphone — голос через мегафон \n
+    pitch_down — низкий голос \n
+    psychodelic — психоделический голос \n
+    pulse — голос с прерываниями \n
+    train_announce — громкоговоритель на вокзале
+    """
+    behind_the_wall = "behind_the_wall"
+    hamster = "hamster"
+    megaphone = "megaphone"
+    pitch_down = "pitch_down"
+    psychodelic = "psychodelic"
+    pulse = "pulse"
+    train_announce = "train_announce"
