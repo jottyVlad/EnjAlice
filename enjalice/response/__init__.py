@@ -3,14 +3,16 @@ from typing import Dict, Optional
 from pydantic import BaseModel, Field
 
 from .response import Response
-from ..context import get_session_state
 from .response_models import Analytics
+from ..context import get_session_state
 
 
 class AliceResponse(BaseModel):
     response: Response = Field(default_factory=Response)
     analytics: Optional[Analytics]
     session_state: Dict = Field(default_factory=get_session_state)
+    application_state: Dict = Field(default_factory=dict)
+    user_state_update: Dict = Field(default_factory=dict)
     version: str = "1.0"
 
 
