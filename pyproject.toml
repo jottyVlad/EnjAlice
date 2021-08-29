@@ -3,6 +3,11 @@ name = "enj-alice"
 version = "2.2.0"
 description = "EnjAlice is a asynchronous framework for Yandex Alice API"
 authors = ["jotty <bard143games@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/jottyVlad/EnjAlice"
+documentation = "https://enjalice.readthedocs.io/ru/latest/"
+keywords = ["alice", "yandex", "api", "async", "framework"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
