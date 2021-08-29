@@ -10,8 +10,13 @@ class Interfaces(BaseModel):
     audio_player: Dict = Field(default_factory=dict)
 
 
+class EntityToken(BaseModel):
+    start: int
+    end: int
+
+
 class Entity(BaseModel):
-    tokens: Dict[str, int] = Field(default_factory=dict)
+    tokens: EntityToken = Field(default_factory=EntityToken)
     type: str = ''
     value: Union[int, Dict] = Field(default_factory=dict)
 
