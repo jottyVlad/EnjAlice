@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from enjalice.attachments.button import ResponseButton
 from enjalice.attachments.cards import Card
 from .response_models import DirectiveStartPurchase, \
-    DirectiveConfirmPurchase
+    DirectiveConfirmPurchase, ShowItemMeta
 
 CT = TypeVar('CT', bound=Card)
 
@@ -20,3 +20,4 @@ class Response(BaseModel, Generic[CT]):
         DirectiveConfirmPurchase
     ]]
     end_session: bool = False
+    show_item_meta: Optional[ShowItemMeta]

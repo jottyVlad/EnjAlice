@@ -2,7 +2,7 @@ from typing import Literal, Dict
 
 from pydantic import BaseModel, Field
 
-from .request_models import Nlu, Markup
+from .request_models import Nlu, Markup, ShowTypes
 
 
 class SimpleUtterance(BaseModel):
@@ -30,3 +30,8 @@ class PurchaseConfirmation(BaseModel):
     purchase_payload: Dict = Field(default_factory=Dict)
     signed_data: str = ''
     signature: str = ''
+
+
+class ShowPull(BaseModel):
+    type: Literal["Show.Pull"] = "Show.Pull"
+    show_type: ShowTypes = ShowTypes.MORNING
