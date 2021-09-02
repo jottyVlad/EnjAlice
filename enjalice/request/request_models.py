@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Dict, Optional, List, Union
 
 from pydantic import BaseModel, Field
@@ -68,3 +69,7 @@ class State(BaseModel):
 
 class Markup(BaseModel):
     dangerous_context: bool = Field(default=False)
+
+
+class ShowTypes(str, Enum):
+    MORNING = "MORNING"

@@ -57,6 +57,17 @@ class Analytics(BaseModel):
     events: List[Event]
 
 
+class ShowItemMeta(BaseModel):
+    """
+    ShowItemMeta - модель для поля show_item_meta в Response (утреннее шоу Алисы)
+    """
+    content_id: str
+    title: Optional[str]
+    title_tts: Optional[str]
+    publication_date: str
+    expiration_date: str
+
+
 class VoiceEffects(str, Enum):
     """
     Перечисление доступных голосовых эффектов. \n

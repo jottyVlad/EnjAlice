@@ -5,14 +5,16 @@ from pydantic import BaseModel, Field
 from .request_models import Meta, Session, State
 from .request_types import SimpleUtterance, \
     ButtonPressed, \
-    PurchaseConfirmation
+    PurchaseConfirmation, \
+    ShowPull
 
 
 class AliceRequest(BaseModel):
     request: Union[
         SimpleUtterance,
         ButtonPressed,
-        PurchaseConfirmation
+        PurchaseConfirmation,
+        ShowPull
     ]
     meta: Meta = Field(default_factory=Meta)
     session: Session = Field(default_factory=Session)

@@ -19,7 +19,8 @@
 а числительные преобразуются в числа.
 - `original_utterance: str` - полный текст пользовательского запроса,
 - `type: str` - тип запроса. На данный момент поддерживаются
-  `SimpleUtterance`, `ButtonPressed` и `Purchase.Confirmation`.
+  `SimpleUtterance`, `ButtonPressed`, `Purchase.Confirmation`
+  и `Show.Pull`.
 - `nlu: Nlu` - Слова и именованные сущности, которые Диалоги извлекли из запроса пользователя.
 
 ## Meta
