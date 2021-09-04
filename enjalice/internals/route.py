@@ -57,11 +57,3 @@ class ABCRoute(ABC):
             raise HandlerTypeError(f'Handler returned: {responder}')
 
         return response
-
-    @abstractmethod
-    async def dispatch_request(self, request_obj: AliceRequest) -> AliceResponse:
-        """Process single AliceRequest, return an AliceResponse
-
-        raises NoHandler if all handlers returned None
-        """
-        raise NotImplementedError
