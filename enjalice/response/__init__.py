@@ -24,7 +24,7 @@ class AliceResponse(BaseModel):
         """
 
         if not (isinstance(skill_id, str) and isinstance(sound_id, str)):
-            raise AttributeError(f"skill_id and sound_id must be str")
+            raise AttributeError("skill_id and sound_id must be str")
         self.response.tts += \
             f" <speaker audio='dialogs-upload/{skill_id}/{sound_id}.opus'> "
         return self
@@ -38,7 +38,7 @@ class AliceResponse(BaseModel):
         """
 
         if not isinstance(text, str):
-            raise AttributeError(f"text must be str")
+            raise AttributeError("text must be str")
         self.response.tts += \
             f"<speaker effect={effect}>{text} <speaker effect='-'>"
         return self

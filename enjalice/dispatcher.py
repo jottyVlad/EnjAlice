@@ -23,7 +23,9 @@ class Dispatcher(ABCRoute):
             # When user starts a new conversation
             response = await self._get_response(self.start_dialog_handler, request_obj)
         else:
-            for intent_handler in self.intents.iter_intents(request_obj.request.nlu.intents):
+            for intent_handler in self.intents.iter_intents(
+                    request_obj.request.nlu.intents
+            ):
                 response = await self._get_response(intent_handler.handler,
                                                     request_obj)
                 if response is not None:
