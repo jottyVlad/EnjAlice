@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from blueprints import bps
+from blueprints import bps, bp as full_bp  # noqa
 from enjalice.dispatcher import Dispatcher
 from enjalice.request import AliceRequest
 from enjalice.response import text
@@ -17,6 +17,9 @@ dp = Dispatcher(start_handler)
 
 for bp in bps:
     dp.register_blueprint(bp)
+
+# Or
+# dp.register_blueprint(full_bp)
 
 if __name__ == '__main__':
     app['dp'] = dp
