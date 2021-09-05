@@ -1,4 +1,4 @@
-from enjalice.blueprints.blueprint import Blueprint
+from enjalice.routers import Blueprint
 from enjalice.request import AliceRequest
 from enjalice.response import text
 

@@ -2,7 +2,7 @@ from aiohttp import web
 
 from enjalice.attachments.button import ImageButton, ResponseButton
 from enjalice.attachments.cards import BigImage
-from enjalice.dispatcher import Dispatcher
+from enjalice.routers import Dispatcher
 from enjalice.request import AliceRequest
 from enjalice.response import text
 from example.aiohttp_server import app

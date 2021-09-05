@@ -16,7 +16,7 @@ pip install enjalice
 ```python
 from aiohttp import web
 from enjalice.request import AliceRequest
-from enjalice.dispatcher import Dispatcher
+from enjalice.routers import Dispatcher
 from enjalice.response import text
 
 
