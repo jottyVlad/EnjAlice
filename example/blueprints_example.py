@@ -1,7 +1,7 @@
 from aiohttp import web
 
 from blueprints import bps, bp as full_bp  # noqa
-from enjalice.dispatcher import Dispatcher
+from enjalice.routers import Dispatcher
 from enjalice.request import AliceRequest
 from enjalice.response import text
 from example.aiohttp_server import app

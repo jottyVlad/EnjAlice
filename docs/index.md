@@ -16,7 +16,7 @@ pip install enjalice
 ```python
 from aiohttp import web
 from enjalice.request import AliceRequest
-from enjalice.dispatcher import Dispatcher
+from enjalice.routers import Dispatcher
 from enjalice.response import text
 
 
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 Аналогично можно использовать FastAPI, BlackSheep или другие,
 даже синхронные, фреймворки, потому что фреймворк поддерживает
 как синхронные, так и асинхронные хендлеры.
- 
+
 ## Copyright
 Проект имеет лицензию MIT.
 
