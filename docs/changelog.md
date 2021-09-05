@@ -23,3 +23,8 @@
 - Добавлена поддержка добавления пауз и эффектов произношения в tts(методы
   `AliceResponse.add_voice_effect(self, effect, text)` и
   `AliceResponse.add_pause(self, ms)`).
+
+## 2.2.1
+
+- Добавлена поддержка запроса с "Утренним шоу Алисы" (
+  `ShowItemMeta` класс в `Response`, `Show.Pull` тип в `AliceRequest`).
