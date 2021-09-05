@@ -15,13 +15,13 @@ T = TypeVar('T')
 
 class Blueprint:
     """Base class implements intent routing logic.
-    
+
     Can be used to declare intents in a modular way.
     """
-    
+
     def __init__(self):
         self.intents: IntentHandlersCollection = IntentHandlersCollection()
-    
+
     def _recreate(self: T) -> T:
         """Return exact copy of this blueprint, without handlers
         """
@@ -71,10 +71,10 @@ class Blueprint:
             raise HandlerTypeError(f'Handler returned: {responder}')
 
         return response
-    
+
     async def _send_start_message(self, request_obj: AliceRequest):
         raise NotImplementedError   # Blueprint does not implement start message
-    
+
     async def dispatch_request(self, request_obj: AliceRequest) -> AliceResponse:
         context.session_state.set(request_obj.state.session)
 
@@ -96,17 +96,17 @@ class Blueprint:
             raise NoHandler(f"Can't handle request: {request_obj}")
 
         return response
-    
+
     def register_blueprint(self, bp: 'Blueprint'):
         self += bp
-    
+
     def __iadd__(self: T, other) -> T:
         if not isinstance(other, Blueprint):
             return NotImplemented
         for intent in other.intents:
             self.intents.add(intent)
         return self
-        
+
     def __add__(self: T, other) -> T:
         if not isinstance(other, Blueprint):
             return NotImplemented
@@ -122,17 +122,16 @@ class Blueprint:
 
 class Dispatcher(Blueprint):
     """A Blueprint that also implements start message
-    
+
     Use as main intent router in your app.
     """
-    
+
     def __init__(self, start_handler: MessageHandlerFunction):
         self.start_handler = start_handler
         super().__init__()
-    
+
     def _recreate(self: T) -> T:
         return self.__class__(self.start_handler)
 
     async def _send_start_message(self, request_obj: AliceRequest):
         return await self._get_response(self.start_handler, request_obj)
-    

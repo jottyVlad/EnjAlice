@@ -8,17 +8,17 @@ from enjalice.request import AliceRequest, State
 @pytest.fixture
 def bps() -> Blueprint:
     bp1 = Blueprint()
-    
+
     @bp1.message_handler(priority=0, intent=['TEST.INTENT.ASYNC'])
     async def test_1(_):
         return text("Test handler 1")
-    
+
     bp2 = Blueprint()
-    
+
     @bp2.message_handler(priority=1, intent=['TEST.INTENT.SYNC'])
     def test_2(_):
         return text("Test handler 2")
-    
+
     return bp1, bp2
 
 
