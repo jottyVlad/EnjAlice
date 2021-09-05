@@ -97,10 +97,10 @@ class Blueprint:
 
         return response
     
-    def register_blueprint(self, bp: Blueprint):
+    def register_blueprint(self, bp: 'Blueprint'):
         self += bp
     
-    def __iadd__(self, other):
+    def __iadd__(self: T, other) -> T:
         if not isinstance(other, Blueprint):
             return NotImplemented
         for intent in other.intents:
