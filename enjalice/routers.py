@@ -97,6 +97,9 @@ class Blueprint:
 
         return response
     
+    def register_blueprint(self, bp: Blueprint):
+        self += bp
+    
     def __iadd__(self, other):
         if not isinstance(other, Blueprint):
             return NotImplemented
