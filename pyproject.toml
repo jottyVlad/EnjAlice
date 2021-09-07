@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "enjalice"
-version = "2.2.1"
+version = "3.0.0"
 description = "EnjAlice is a asynchronous framework for Yandex Alice API"
 authors = ["jotty <bard143games@gmail.com>"]
 readme = "README.md"
