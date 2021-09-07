@@ -1,5 +1,5 @@
 from aiohttp import web
-from enjalice.dispatcher import Dispatcher
+from enjalice.routers import Dispatcher
 from enjalice.request import AliceRequest
 from enjalice.response import text
 

@@ -13,7 +13,7 @@ pip install enjalice
 ## Пример бота
 
 Все примеры находятся в папке /example
- 
+
 ## Copyright
 Проект имеет лицензию MIT.
 

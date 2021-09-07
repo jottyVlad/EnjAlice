@@ -17,6 +17,7 @@ nav:
   - Changelog: changelog.md
   - Документация:
       - Dispatcher: docs/dispatcher.md
+      - Blueprint: docs/blueprints.md
       - Request: docs/request.md
       - Response: docs/response.md
       - Вложения:

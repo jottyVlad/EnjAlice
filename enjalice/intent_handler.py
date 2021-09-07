@@ -1,10 +1,10 @@
 import dataclasses
 from bisect import insort
+from collections import defaultdict
 from collections.abc import MutableSet
 from contextlib import suppress
-from typing import Iterator, Optional, Iterable, Dict
-from collections import defaultdict
 from itertools import zip_longest
+from typing import Iterator, Optional, Iterable, Dict, List
 
 from ._hints import MessageHandlerFunction
 
@@ -28,7 +28,7 @@ class IntentHandler:
 
 class IntentHandlersCollection(MutableSet[IntentHandler]):
     def __init__(self) -> None:
-        self.__handlers: Dict[Optional[str], IntentHandler] = defaultdict(list)
+        self.__handlers: Dict[Optional[str], List[IntentHandler]] = defaultdict(list)
 
     def add(self, obj: IntentHandler) -> None:
         """Add given IntentHandler to collection
@@ -47,16 +47,20 @@ class IntentHandlersCollection(MutableSet[IntentHandler]):
                 yield handler
 
     def __len__(self):
-        return sum(map(len, self.__handlers.values()))  # TODO doesnt actually count number of unique handlers
+        # TODO doesnt actually count number of unique handlers
+        return sum(map(len, self.__handlers.values()))
 
-    def iter_intents(self, intents: Iterable[str], allow_fallback=True) -> Iterator[IntentHandler]:
+    def iter_intents(self,
+                     intents: Iterable[str],
+                     allow_fallback=True
+                     ) -> Iterator[IntentHandler]:
         intent_buckets = [self.__handlers[i] for i in intents]
         if allow_fallback:
             intent_buckets.append(self.__handlers[None])
         for batch in zip_longest(*intent_buckets):
             for handler in sorted(filter(lambda i: i is not None, batch)):
                 yield handler
-    
+
     def discard(self, obj: IntentHandler):
         """Remove given IntentHandler from collection if it exists
         """

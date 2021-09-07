@@ -1,22 +1,31 @@
 import pytest
 
-from enjalice.routers import Dispatcher
+from enjalice.routers import Blueprint, Dispatcher
 from enjalice.response import AliceResponse, text
 from enjalice.request import AliceRequest, State
 
 
 @pytest.fixture
-def dp() -> Dispatcher:
-    d = Dispatcher(lambda _: AliceResponse())
+def bps() -> Blueprint:
+    bp1 = Blueprint()
 
-    @d.message_handler(priority=0, intent=['TEST.INTENT.ASYNC'])
+    @bp1.message_handler(priority=0, intent=['TEST.INTENT.ASYNC'])
     async def test_1(_):
         return text("Test handler 1")
 
-    @d.message_handler(priority=1, intent=['TEST.INTENT.SYNC'])
+    bp2 = Blueprint()
+
+    @bp2.message_handler(priority=1, intent=['TEST.INTENT.SYNC'])
     def test_2(_):
         return text("Test handler 2")
 
+    return bp1, bp2
+
+
+@pytest.fixture
+def dp(bps) -> Dispatcher:
+    d = Dispatcher(lambda _: AliceResponse())
+    d += bps[0] + bps[1]
     return d
 
 
