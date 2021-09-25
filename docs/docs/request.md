@@ -4,24 +4,21 @@
 
 ## AliceRequest
 
-- `request: Request` - основные поля запроса.
+- ```
+  request: Union[
+    SimpleUtterance, ButtonPressed,
+    PurchaseConfirmation, ShowPull
+  ]
+  ```
+  основные поля запроса. На данный момент поддерживаются запросы типа
+  `SimpleUtterance`, `ButtonPressed`, `Purchase.Confirmation`
+  и `Show.Pull`. Подробнее смотрите в документации Яндекса:
+  [тут](https://yandex.ru/dev/dialogs/alice/doc/request.html#request__request-desc)
 - `meta: Meta` - мета-информация о запросе.
 - `session: Session` - информация о сессии запроса.
 - `state: State` - состояния (State). Можно 
 использовать только если включена соответствующая 
 функция в Диалогах.
-
-## Request
-
-- `command: str` - Нормализованный текст запроса. 
-В ходе нормализации текст, в частности, очищается от 
-знаков препинания, приводится к нижнему регистру, 
-а числительные преобразуются в числа.
-- `original_utterance: str` - полный текст пользовательского запроса,
-- `type: str` - тип запроса. На данный момент поддерживаются
-  `SimpleUtterance`, `ButtonPressed`, `Purchase.Confirmation`
-  и `Show.Pull`.
-- `nlu: Nlu` - Слова и именованные сущности, которые Диалоги извлекли из запроса пользователя.
 
 ## Meta
 

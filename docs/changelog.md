@@ -28,3 +28,8 @@
 
 - Добавлена поддержка запроса с "Утренним шоу Алисы" (
   `ShowItemMeta` класс в `Response`, `Show.Pull` тип в `AliceRequest`).
+
+## 3.0.0
+
+- Добавлены `Blueprint`, переписана архитектура `Dispatcher`
+  с использованием `Blueprint`. Спасибо за контрибутинг Crystal Melting Dot (cmd410)! 
