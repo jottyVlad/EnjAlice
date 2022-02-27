@@ -6,9 +6,9 @@ from .button import ImageButton
 
 
 class Header(BaseModel):
-    text: str
+    text: str = ""
 
 
 class Footer(BaseModel):
-    text: str
+    text: str = ""
     button: Optional[ImageButton] = Field(default_factory=ImageButton)
