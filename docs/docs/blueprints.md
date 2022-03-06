@@ -8,7 +8,7 @@
 
 В одном файле можно описать блупринт:
 
-```
+```python
 from enjalice.routers import Blueprint
 from enjalice.request import AliceRequest
 from enjalice.response import text
@@ -23,7 +23,7 @@ async def help_handler(_: AliceRequest):
 
 А в другом написать реализацию диспетчера, зарегистрировав блупринт.
 
-```
+```python
 from blueprint import bp
 from enjalice.routers import Dispatcher
 from enjalice.request import AliceRequest
