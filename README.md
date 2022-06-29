@@ -14,7 +14,12 @@ pip install enjalice
 
 Все примеры находятся в папке /example
 
+## Правила для контрибьютеров
+
+Правила для контрибьютеров изложены в CONTRIBUTION.md
+
 ## Copyright
+
 Проект имеет лицензию MIT.
 
 Copyright © Jotty
