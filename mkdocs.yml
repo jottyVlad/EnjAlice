@@ -41,3 +41,10 @@ theme:
   font:
     text: Roboto Mono
     code: Monaco
+
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets

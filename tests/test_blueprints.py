@@ -1,12 +1,14 @@
+from typing import Tuple
+
 import pytest
 
-from enjalice.routers import Blueprint, Dispatcher
-from enjalice.response import AliceResponse, text
 from enjalice.request import AliceRequest, State
+from enjalice.response import AliceResponse, text
+from enjalice.routers import Blueprint, Dispatcher
 
 
 @pytest.fixture
-def bps() -> Blueprint:
+def bps() -> Tuple[Blueprint, Blueprint]:
     bp1 = Blueprint()
 
     @bp1.message_handler(priority=0, intent=['TEST.INTENT.ASYNC'])
