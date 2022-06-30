@@ -11,7 +11,7 @@ pip install enjalice
 
 ## Наименование веток
 
-Ветки именовать следует в виде <author>_<branch-type>_<branch-name>.
+Ветки именовать следует в виде ```<author>_<branch-type>_<branch-name>```.
 Тип ветки может быть WIP (work in progress), Bug, Feature, Junk
 (ветка для экспериментов).
 
